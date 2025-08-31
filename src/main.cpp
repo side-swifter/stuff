@@ -1,15 +1,10 @@
 #include "main.h"
-#include "pros/apix.h"
 #include "pros/misc.h"
-#include "pros/screen.hpp"
-#include "team_logo.h"
 
 static void show_splash() {
-	lv_obj_t* img = lv_img_create(lv_scr_act(), NULL);   // v5 API
-	lv_img_set_src(img, &team_logo);
-	lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
+	// Simple text splash for 2 seconds (temporary until toolchain fixed)
+	printf("Gridwalkers Team - Brain Flash!\n");
 	pros::delay(2000);
-	lv_obj_del(img);
 }
 
 /**

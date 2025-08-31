@@ -15,8 +15,6 @@ INCDIR=$(ROOT)/include
 WARNFLAGS+=
 EXTRA_CFLAGS=
 EXTRA_CXXFLAGS=
-CXXSTD := -std=gnu++20
-CXXFLAGS += $(CXXSTD)
 
 # Set to 1 to enable hot/cold linking
 USE_PACKAGE:=1
@@ -47,3 +45,6 @@ TEMPLATE_FILES=$(INCDIR)/$(LIBNAME)/*.h $(INCDIR)/$(LIBNAME)/*.hpp
 ################################################################################
 ########## Nothing below this line should be edited by typical users ###########
 -include ./common.mk
+
+# --- force C++20 and quiet some noisy deprecations ---
+override CXXFLAGS += -std=gnu++20 -Wno-deprecated-declarations
