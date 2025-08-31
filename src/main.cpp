@@ -2,12 +2,14 @@
 #include "pros/misc.h"
 
 static void show_splash() {
-	// Simple text-based splash screen for 2 seconds
-	pros::lcd::initialize();
-	pros::lcd::set_text(1, "Gridwalkers Team");
-	pros::lcd::set_text(2, "Brain Flash!");
+	// Display splash screen using Brain.Screen API
+	pros::screen::set_pen(pros::Color::white);
+	pros::screen::fill_rect(0, 0, 480, 240);
+	pros::screen::set_pen(pros::Color::black);
+	pros::screen::print(pros::TEXT_MEDIUM_CENTER, 240, 100, "Gridwalkers Team");
+	pros::screen::print(pros::TEXT_MEDIUM_CENTER, 240, 140, "Brain Flash!");
 	pros::delay(2000);
-	pros::lcd::clear();
+	pros::screen::erase();
 }
 
 /**
