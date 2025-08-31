@@ -1,7 +1,8 @@
 #include "main.h"
-#include "pros/apix.h"
+#include "pros/apix.h"      // LVGL v5.3 + PROS shims (must be before team_logo.h)
 #include "pros/misc.h"
-#include "team_logo.h"
+#include "team_logo.h"      // declares lv_img_dsc_t team_logo
+
 
 static void show_splash() {
 	lv_obj_t* img = lv_img_create(lv_scr_act(), NULL);

@@ -46,6 +46,7 @@ TEMPLATE_FILES=$(INCDIR)/$(LIBNAME)/*.h $(INCDIR)/$(LIBNAME)/*.hpp
 ########## Nothing below this line should be edited by typical users ###########
 -include ./common.mk
 
-# --- Force C++20 for arm-none-eabi-g++ (required for std::is_constant_evaluated) ---
+# === Force C++20 for arm-none-eabi-g++ (needed by pros/rtos.hpp) ===
 override CXXFLAGS := $(filter-out -std=gnu++11 -std=gnu++14 -std=gnu++17 -std=c++11 -std=c++14 -std=c++17,$(CXXFLAGS)) -std=gnu++20
 override CFLAGS   := $(filter-out -std=gnu11 -std=gnu14 -std=gnu17 -std=c11 -std=c14 -std=c17,$(CFLAGS))
+
