@@ -1,15 +1,15 @@
 #include "main.h"
+#include "pros/apix.h"
 #include "pros/misc.h"
+#include "pros/screen.hpp"
+#include "team_logo.h"
 
 static void show_splash() {
-	// Display splash screen using Brain.Screen API
-	pros::screen::set_pen(pros::Color::white);
-	pros::screen::fill_rect(0, 0, 480, 240);
-	pros::screen::set_pen(pros::Color::black);
-	pros::screen::print(pros::TEXT_MEDIUM_CENTER, 240, 100, "Gridwalkers Team");
-	pros::screen::print(pros::TEXT_MEDIUM_CENTER, 240, 140, "Brain Flash!");
+	lv_obj_t* img = lv_img_create(lv_scr_act(), NULL);   // v5 API
+	lv_img_set_src(img, &team_logo);
+	lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
 	pros::delay(2000);
-	pros::screen::erase();
+	lv_obj_del(img);
 }
 
 /**
@@ -71,8 +71,9 @@ void autonomous() {
 void opcontrol() {
 	// Basic motor control
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2, pros::E_MOTOR_GEARSET_18, true);  // reversed motor
+	pros::Motor left_mtr(1, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
+	pros::Motor right_mtr(2, pros::v5::MotorGears::green, pros::v5::MotorUnits::degrees);
+	right_mtr.set_reversed(true);   // reverse direction
 
 	while (true) {
 		int left = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
