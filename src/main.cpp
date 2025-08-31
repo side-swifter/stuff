@@ -1,14 +1,13 @@
 #include "main.h"
-#include "pros/apix.h"
 #include "pros/misc.h"
-#include "team_logo.h"
 
 static void show_splash() {
-	lv_obj_t* img = lv_img_create(lv_scr_act(), NULL);
-	lv_img_set_src(img, &team_logo);
-	lv_obj_align(img, NULL, LV_ALIGN_CENTER, 0, 0);
-	pros::delay(1500);
-	lv_obj_del(img);
+	// Simple text-based splash screen for 2 seconds
+	pros::lcd::initialize();
+	pros::lcd::set_text(1, "Gridwalkers Team");
+	pros::lcd::set_text(2, "Brain Flash!");
+	pros::delay(2000);
+	pros::lcd::clear();
 }
 
 /**
@@ -51,7 +50,7 @@ void competition_initialize() {}
  * from where it left off.
  */
 void autonomous() {
-	show_splash();
+	// Autonomous code here
 }
 
 /**
@@ -68,12 +67,10 @@ void autonomous() {
  * task, not resume it from where it left off.
  */
 void opcontrol() {
-	show_splash();
-	
 	// Basic motor control
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
 	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
+	pros::Motor right_mtr(2, pros::E_MOTOR_GEARSET_18, true);  // reversed motor
 
 	while (true) {
 		int left = master.get_analog(pros::E_CONTROLLER_ANALOG_LEFT_Y);
